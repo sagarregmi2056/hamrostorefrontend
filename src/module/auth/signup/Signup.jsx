@@ -1,9 +1,44 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 
 import { ArrowRight } from 'lucide-react'
 
+import { object, string, ref } from 'yup';
+import { useFormik } from 'formik';
+
+
 const Signup = () => {
+
+
+  let userSchema = object({
+    name: string().required(),
+   
+    email: string().email().required(),
+    password: string().required().min(6),
+    confirmpassword: string().oneOf([ref('password'), null], 'Passwords must match')
+    .required('Confirm password is required')
+   
+  });
+
+  const formik = useFormik({
+    validationSchema: userSchema,
+    initialValues:{
+      name : '',
+      email:'',
+      password:'',
+      confirmpassword:''
+    },
+    onSubmit:(data)=>{
+
+      console.log(data)
+    }
+  })
+  const {errors, getFieldProps} = formik
+
+   useEffect(()=>{
+    console.log(errors);
+
+  },[errors])
   return (
     <>
        <section>
@@ -12,7 +47,7 @@ const Signup = () => {
           <div className="absolute inset-0">
             <img
               className="h-full w-full rounded-md object-cover object-top"
-              src="https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c2lnbnVwfGVufDB8fDB8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60"
+              src="https://scontent.fbwa4-1.fna.fbcdn.net/v/t39.30808-6/316409962_1275826183197798_45493718801421548_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=_TruHVDa7pUAX9tyhMj&_nc_ht=scontent.fbwa4-1.fna&oh=00_AfDvTlPt1MtkCH4A4sON-Wj5rMY1wlHpFJM3mCpBXRrgdg&oe=65367D9F"
               alt=""
             />
           </div>
@@ -108,7 +143,7 @@ const Signup = () => {
                 Sign In
               </a>
             </p>
-            <form action="#" method="POST" className="mt-8">
+            <form noValidate onSubmit={formik.handleSubmit} method="POST" className="mt-8">
               <div className="space-y-5">
                 <div>
                   <label htmlFor="name" className="text-base font-medium text-gray-900">
@@ -121,8 +156,20 @@ const Signup = () => {
                       type="text"
                       placeholder="Full Name"
                       id="name"
+                      {...getFieldProps('name')}
                     ></input>
                   </div>
+                    {
+                      errors.name &&
+                  <label className="text-sm font-medium text-red-700">
+
+                
+                  {errors.name}
+
+                   </label>
+                    }
+
+
                 </div>
                 <div>
                   <label htmlFor="email" className="text-base font-medium text-gray-900">
@@ -135,9 +182,20 @@ const Signup = () => {
                       type="email"
                       placeholder="Email"
                       id="email"
+                      {...getFieldProps('email')}
                     ></input>
                   </div>
+                  {
+                      errors.email &&
+                  <label className="text-sm font-medium text-red-700">
+
+                
+                  {errors.email}
+
+                   </label>
+                    }
                 </div>
+                
                 <div>
                   <div className="flex items-center justify-between">
                     <label htmlFor="password" className="text-base font-medium text-gray-900">
@@ -145,18 +203,59 @@ const Signup = () => {
                       Password{' '}
                     </label>
                   </div>
+                  
                   <div className="mt-2">
                     <input
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="password"
                       placeholder="Password"
                       id="password"
+                      {...getFieldProps('password')}
                     ></input>
                   </div>
+
+                  {
+                      errors.password &&
+                  <label className="text-sm font-medium text-red-700">
+
+                
+                  {errors.password}
+
+                   </label>
+                    }
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between">
+                    <label htmlFor="password" className="text-base font-medium text-gray-900">
+                      {' '}
+                      Confirm password{' '}
+                    </label>
+                  </div>
+                  
+                  <div className="mt-2">
+                    <input
+                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                      type="password"
+                      placeholder="Password"
+                      id="confirmpassword"
+                      {...getFieldProps('confirmpassword')}
+                    ></input>
+                  </div>
+
+                  {
+                      errors.confirmpassword &&
+                  <label className="text-sm font-medium text-red-700">
+
+                
+                  {errors.confirmpassword}
+
+                   </label>
+                    }
                 </div>
                 <div>
                   <button
-                    type="button"
+                    type="submit"
                     className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                   >
                     Create Account <ArrowRight className="ml-2" size={16} />
