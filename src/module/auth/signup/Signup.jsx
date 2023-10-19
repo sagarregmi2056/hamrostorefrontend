@@ -6,9 +6,17 @@ import { ArrowRight } from 'lucide-react'
 import { object, string, ref } from 'yup';
 import { useFormik } from 'formik';
 
+import axios from 'axios';
 
-const Signup = () => {
+// we will be calling it on name+apiurlcall function
+const apiurl = import.meta.env.VITE_API_URL;
 
+
+
+const  Signup = () => {
+
+
+  // creating schema for validation
 
   let userSchema = object({
     name: string().required(),
@@ -19,6 +27,8 @@ const Signup = () => {
     .required('Confirm password is required')
    
   });
+
+  // formik validation
 
   const formik = useFormik({
     validationSchema: userSchema,
@@ -31,6 +41,7 @@ const Signup = () => {
     onSubmit:(data)=>{
 
       console.log(data)
+      signupApiCall(data)
     }
   })
   const {errors, getFieldProps} = formik
@@ -39,6 +50,25 @@ const Signup = () => {
     console.log(errors);
 
   },[errors])
+
+
+
+
+  // calling api function 
+  // we will call this function on onsubmit 
+
+  const signupApiCall = (data)=>{
+    console.log(apiurl);
+    // here we are sending data on the given url
+    axios.post(`${apiurl}/api/users/signup`,data).then(res=>{
+      console.log(res.data);
+
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+
+
   return (
     <>
        <section>
