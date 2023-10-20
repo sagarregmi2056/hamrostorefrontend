@@ -1,6 +1,9 @@
 import React from 'react'
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react'
 
+
+// this is resposible for the navigation like a tag in html
+import {useNavigate} from 'react-router-dom';
 const menuItems = [
     {
       name: 'Home',
@@ -21,8 +24,15 @@ const Navbar = () => {
 
     const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
+    // creating varible for navigation and later we gonna create a function below for navigation
+    const navigate = useNavigate();
+
     const toggleMenu = () => {
       setIsMenuOpen(!isMenuOpen)
+    }
+
+    const gotopath = (path)=>{
+      navigate(path)
     }
   return (
     <>
@@ -98,12 +108,18 @@ const Navbar = () => {
         </div>
         <div className="hidden space-x-2 lg:block">
           <button
+
+          // here we going to add onlick function to navigate 
+
+            onClick={()=>gotopath('/signup')}
             type="button"
             className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           >
             Sign up
           </button>
           <button
+
+            onClick={()=>gotopath('/signin')}
             type="button"
             className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           >
@@ -184,12 +200,15 @@ const Navbar = () => {
                 </div>
                 <div className="mt-2 space-y-2">
                   <button
+                   onClick={()=>gotopath('/signup')}
                     type="button"
                     className="w-full rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
                     Sign up  
                   </button>
                   <button
+
+onClick={()=>gotopath('/signin')}
                     type="button"
                     className="w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >

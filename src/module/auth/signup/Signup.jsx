@@ -166,7 +166,7 @@ const  Signup = () => {
             <p className="mt-2 text-base text-gray-600">
               Already have an account?{' '}
               <a
-                href="#"
+                href="/signin"
                 title=""
                 className="font-medium text-black transition-all duration-200 hover:underline"
               >
@@ -176,7 +176,7 @@ const  Signup = () => {
             <form noValidate onSubmit={formik.handleSubmit} method="POST" className="mt-8">
               <div className="space-y-5">
                 <div>
-                  <label htmlFor="name" className="text-base font-medium text-gray-900">
+                  <label htmlFor="name" className="text-base font-medium flex items-start  text-gray-900">
                     {' '}
                     Full Name{' '}
                   </label>
@@ -202,7 +202,7 @@ const  Signup = () => {
 
                 </div>
                 <div>
-                  <label htmlFor="email" className="text-base font-medium text-gray-900">
+                  <label htmlFor="email" className="text-base font-medium flex items-start text-gray-900">
                     {' '}
                     Email address{' '}
                   </label>
