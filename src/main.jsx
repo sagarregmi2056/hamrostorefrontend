@@ -10,6 +10,7 @@ import Root from './Root.jsx'
 import Home from './module/Home/Home.jsx'
 import Signup from './module/auth/signup/Signup.jsx'
 import Signin from './module/auth/signin/Signin.jsx'
+import AuthProvider from './context/auth/AuthProvider.jsx'
 // import { LogIn } from 'lucide-react'
 
 
@@ -59,9 +60,19 @@ const router = createBrowserRouter([
     ]
   }
 ])
+
+
+
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+
+  <AuthProvider>
+
+  
     <RouterProvider router={router} />
+
+    </AuthProvider>
     {/* <App /> */}
   </React.StrictMode>,
 )

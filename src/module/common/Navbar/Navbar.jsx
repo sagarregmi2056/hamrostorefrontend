@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react'
 
 
 // this is resposible for the navigation like a tag in html
 import {useNavigate} from 'react-router-dom';
+import { AuthContext } from '../../../context/auth/AuthContext';
 const menuItems = [
     {
       name: 'Home',
@@ -21,6 +22,10 @@ const menuItems = [
 
 const Navbar = () => {
 
+
+  // aba use context use garna lai hami 
+
+    const {isAutheticated,user,logout}=useContext(AuthContext)
 
     const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
@@ -106,6 +111,22 @@ const Navbar = () => {
             ))}
           </ul>
         </div>
+         
+
+         {isAutheticated?
+         
+         <div>
+         <button
+
+onClick={logout}
+type="button"
+className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+>
+Logout
+</button>
+
+         </div>:
+
         <div className="hidden space-x-2 lg:block">
           <button
 
@@ -126,6 +147,7 @@ const Navbar = () => {
             Log In
           </button>
         </div>
+         }
         <div className="lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
         </div>
