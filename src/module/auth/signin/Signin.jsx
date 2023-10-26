@@ -16,12 +16,15 @@ import { ToastContext } from '../../../context/Toaster/ToastContext';
 
 // we will be calling it on name+apiurlcall function
 const apiurl = import.meta.env.VITE_API_URL;
+import { useNavigate } from 'react-router-dom';
 
 const Signin = () => {
 
 
 
 const {login}=useContext(AuthContext)
+
+const navigate = useNavigate();
 
 const {showToast} = useContext(ToastContext)
 
@@ -85,6 +88,8 @@ const {showToast} = useContext(ToastContext)
      login(res.data);
 
      showToast({show:true,title:'welcome back',message:'Login successful 🚀 ',type:'success'})
+
+     navigate('/');
    
 
     }).catch((err)=>{
