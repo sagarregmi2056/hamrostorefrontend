@@ -84,11 +84,11 @@ const {showToast} = useContext(ToastContext)
     // sending data to the login function
      login(res.data);
 
-     showToast({show:true,title:'welcome back',message:'Login successful ',type:'success'})
+     showToast({show:true,title:'welcome back',message:'Login successful 🚀 ',type:'success'})
    
 
     }).catch((err)=>{
-      showToast({show:true,title:'error',message:'Login failed ',type:'error'})
+      showToast({show:true,title:'Error' , message: err.response?.data.error||'server error'})
       console.log(err)
     })}
   return (
