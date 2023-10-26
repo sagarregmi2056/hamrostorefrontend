@@ -25,7 +25,7 @@ import { createContext } from "react"
 export const AuthContext = createContext({
 
     // constructur jasari use garau 
-    isAutheticated: false,
+    isAuthenticated: false,
     user:null,
 
     // functional change haru k k xan ta 

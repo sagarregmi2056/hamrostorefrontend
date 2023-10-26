@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ArrowRight } from 'lucide-react'
 
 
@@ -11,6 +11,7 @@ import { object, string, ref } from 'yup';
 import { useFormik } from 'formik';
 
 import axios from 'axios';
+import { AuthContext } from '../../../context/auth/AuthContext';
 
 // we will be calling it on name+apiurlcall function
 const apiurl = import.meta.env.VITE_API_URL;
@@ -19,7 +20,7 @@ const Signin = () => {
 
 
 
-
+const {login}=useContext(AuthContext)
 
 
 
@@ -69,11 +70,17 @@ const Signin = () => {
     // here we are sending data on the given url
     axios.post(`${apiurl}/api/users/signin`,data).then(res=>{
 
+    
+      // const {user:{name}} = res.data;
 
-      console.log(res.data);
+      // console.log(name);
 
     //   localstorage ma response bata aako data ,here its token lai save garna parni xa 
-    localStorage.setItem("token",res.data.token)
+    // localStorage.setItem("token",res.data.token)
+
+    // sending data to the login function
+     login(res.data);
+   
 
     }).catch((err)=>{
       console.log(err)

@@ -1,42 +1,38 @@
 import React, { useState } from 'react'
-import {AuthContext} from './AuthContext'
+import { AuthContext } from './AuthContext';
 
-
-
-// after setting up everything we gonna use it on main function
-const AuthProvider = ({children}) => {
-
-    const [isAutheticated,setAuthenticated] = useState(false);
-    const [user,setuser]= useState(null);
-
-    const login =(userData)=>{
-        localStorage.setItem("token",userData.token)
-        setAuthenticated(true);
-        setuser(userData.user);
-
-    }
+export default function AuthProvier({ children }) {
     
-    const logout =(userData)=>{
-        localStorage.removeItem("token",userData.token)
-        setAuthenticated(true);
-        setuser(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState(null);
+
+    const login = (userData) => {
+
+        // console.log(`userData ${typeof userData}`);
+        localStorage.setItem("token", userData.token)
+        setIsAuthenticated(true);
         
+        setUser(userData.user.name);
     }
 
-    const updatevalue = {
-        isAutheticated,
+    console.log(`is authenticated ko value ${isAuthenticated}`);
+
+    const logout = () => {
+        localStorage.removeItem("token")
+        setIsAuthenticated(false);
+        setUser(null);
+    };
+
+    const updatedValues = {
+        isAuthenticated,
         user,
         login,
         logout
     }
-  return (
-   <AuthContext.provider value={updatevalue}>
 
-   {children}
-
-
-   </AuthContext.provider>
-  )
+    return (
+        <AuthContext.Provider value={updatedValues}>
+            {children}
+        </AuthContext.Provider>
+    )
 }
-
-export default AuthProvider
