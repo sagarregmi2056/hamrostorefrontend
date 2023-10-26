@@ -11,6 +11,8 @@ import Home from './module/Home/Home.jsx'
 import Signup from './module/auth/signup/Signup.jsx'
 import Signin from './module/auth/signin/Signin.jsx'
 import AuthProvider from './context/auth/AuthProvider.jsx'
+import Toaster from './module/common/Toaster/Toaster.jsx'
+import Toastprovider from './context/Toaster/Toastprovider.jsx'
 // import { LogIn } from 'lucide-react'
 
 
@@ -67,12 +69,18 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 
+  <Toastprovider>
+
   <AuthProvider>
+
+  <Toaster/>
 
   
     <RouterProvider router={router} />
 
     </AuthProvider>
+
+    </Toastprovider>
     {/* <App /> */}
   </React.StrictMode>
 )

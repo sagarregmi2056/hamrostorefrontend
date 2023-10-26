@@ -12,6 +12,7 @@ import { useFormik } from 'formik';
 
 import axios from 'axios';
 import { AuthContext } from '../../../context/auth/AuthContext';
+import { ToastContext } from '../../../context/Toaster/ToastContext';
 
 // we will be calling it on name+apiurlcall function
 const apiurl = import.meta.env.VITE_API_URL;
@@ -21,6 +22,8 @@ const Signin = () => {
 
 
 const {login}=useContext(AuthContext)
+
+const {showToast} = useContext(ToastContext)
 
 
 
@@ -80,9 +83,12 @@ const {login}=useContext(AuthContext)
 
     // sending data to the login function
      login(res.data);
+
+     showToast({show:true,title:'welcome back',message:'Login successful ',type:'success'})
    
 
     }).catch((err)=>{
+      showToast({show:true,title:'error',message:'Login failed ',type:'error'})
       console.log(err)
     })}
   return (
