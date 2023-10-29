@@ -8,15 +8,15 @@ import { AuthContext } from '../../../context/auth/AuthContext';
 const menuItems = [
     {
       name: 'Home',
-      href: '#',
+      href: '/'
     },
     {
       name: 'About',
-      href: '#',
+      href: '/about',
     },
     {
       name: 'Contact',
-      href: '#',
+      href: '/contact',
     },
   ]
 
@@ -94,11 +94,13 @@ const Navbar = () => {
         d="M24 31h6.221s9.781-.893 9.781 8-9.781 8-9.781 8H24"
       />
       <path d="M29 13h2v39h-2z" />
+      
     </svg>
 
 
           </span>
           <span className="font-bold">Hamrostore</span>
+          
         </div>
         <div className="hidden grow items-start lg:flex">
           <ul className="ml-12 inline-flex space-x-8">

@@ -13,6 +13,8 @@ import Signin from './module/auth/signin/Signin.jsx'
 import AuthProvider from './context/auth/AuthProvider.jsx'
 import Toaster from './module/common/Toaster/Toaster.jsx'
 import Toastprovider from './context/Toaster/Toastprovider.jsx'
+import About from './module/About/About.jsx'
+import Contact from './module/Contact/Contact.jsx'
 // import { LogIn } from 'lucide-react'
 
 
@@ -36,14 +38,14 @@ const router = createBrowserRouter([
         path:'signin',
         element: <Signin/>
       },
-      // {
-      //   path:'about',
-      //   element:<About/>
-      // },
-      // {
-      //   path:'contact',
-      //   element:<Contact/>
-      // },
+      {
+        path:'about',
+        element:<About/>
+      },
+      {
+        path:'contact',
+        element:<Contact/>
+      },
 
       // {
       //   path: "userprofile/:userid",
