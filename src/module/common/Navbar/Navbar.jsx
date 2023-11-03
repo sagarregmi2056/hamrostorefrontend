@@ -3,20 +3,20 @@ import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react'
 
 
 // this is resposible for the navigation like a tag in html
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { AuthContext } from '../../../context/auth/AuthContext';
 const menuItems = [
     {
       name: 'Home',
-      href: '/'
+      path: '/'
     },
     {
       name: 'About',
-      href: '/about',
+      path: '/about',
     },
     {
       name: 'Contact',
-      href: '/contact',
+      path: '/contact',
     },
   ]
 
@@ -104,18 +104,20 @@ const Navbar = () => {
         </div>
         <div className="hidden grow items-start lg:flex">
           <ul className="ml-12 inline-flex space-x-8">
-            {menuItems.map((item) => (
-              <li key={item.name}>
-                <a
-                  href={item.href}
+            {menuItems.map((item,index) => (
+              <Link to={item.path} key={index}>
+              <li>
+                <span
+                 
                   className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
                 >
                   {item.name}
                   <span>
                     <ChevronDown className="ml-2 h-4 w-4" />
                   </span>
-                </a>
-              </li>
+                </span>
+              </li></Link>
+              
             ))}
           </ul>
         </div>
