@@ -15,6 +15,7 @@ import Toaster from './module/common/Toaster/Toaster.jsx'
 import Toastprovider from './context/Toaster/Toastprovider.jsx'
 import About from './module/About/About.jsx'
 import Contact from './module/Contact/Contact.jsx'
+import BlockAuthRoutes from './routes/BlockAuthRoutes.jsx'
 // import { LogIn } from 'lucide-react'
 
 
@@ -27,16 +28,16 @@ const router = createBrowserRouter([
     children: [
       {
         path:'/',
-        element: <Home/>
+        element:  <Home/>
       },
       {
         path:'signup',
-        element: <Signup/>
+        element: <BlockAuthRoutes> <Signup/></BlockAuthRoutes> 
       },
 
       {
         path:'signin',
-        element: <Signin/>
+        element: <BlockAuthRoutes><Signin /></BlockAuthRoutes>
       },
       {
         path:'about',
@@ -76,6 +77,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <AuthProvider>
 
   <Toaster/>
+  {/* <BlockAuthRoutes>
+  <RouterProvider router={router} />
+  </BlockAuthRoutes> */}
 
   
     <RouterProvider router={router} />
