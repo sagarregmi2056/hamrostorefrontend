@@ -43,7 +43,7 @@ const apiurl = import.meta.env.VITE_API_URL;
 
   const getUserApi= (token,decode)=>{
 
-    axios.get(`${apiurl}//api/users/${decode._id}`.then(res=>{
+    axios.get(`${apiurl}/api/users/${decode._id}`).then(res=>{
 
     console.log(res.data);
 
@@ -52,7 +52,7 @@ const apiurl = import.meta.env.VITE_API_URL;
       showToast({show:true,title:'Error' , message: err.response?.data.error||'server error'})
       console.log(err)
       
-    }))
+    })
     
   }
     return (
