@@ -17,7 +17,7 @@ const apiurl = import.meta.env.VITE_API_URL;
 
 
  function Root ()  {
-  const {logout} =useContext(AuthContext)
+  const {logout,login} =useContext(AuthContext)
   const {showToast} =useContext(ToastContext)
   useEffect(()=>{
     reauthenticate()
@@ -46,6 +46,7 @@ const apiurl = import.meta.env.VITE_API_URL;
     axios.get(`${apiurl}/api/users/${decode._id}`).then(res=>{
 
     console.log(res.data);
+    login({token , user: res.data})
 
 
     }).catch(err=>{
