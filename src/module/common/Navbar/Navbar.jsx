@@ -18,6 +18,14 @@ const menuItems = [
       name: 'Contact',
       path: '/contact',
     },
+
+    {
+      name: 'dashboard',
+      path: '/',
+    },
+
+
+
   ]
 
 const Navbar = () => {
@@ -112,9 +120,9 @@ const Navbar = () => {
                   className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
                 >
                   {item.name}
-                  <span>
+                  {/* <span>
                     <ChevronDown className="ml-2 h-4 w-4" />
-                  </span>
+                  </span> */}
                 </span>
               </li></Link>
               
@@ -218,18 +226,18 @@ const Navbar = () => {
                 <div className="mt-6">
                   <nav className="grid gap-y-4">
                     {menuItems.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.path}
                         className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50"
                       >
                         <span className="ml-3 text-base font-medium text-gray-900">
                           {item.name}
                         </span>
-                        <span>
+                        {/* <span>
                           <ChevronRight className="ml-3 h-4 w-4" />
-                        </span>
-                      </a>
+                        </span> */}
+                      </Link>
                     ))}
                   </nav>
                 </div>
