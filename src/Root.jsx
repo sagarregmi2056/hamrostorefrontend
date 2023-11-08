@@ -6,6 +6,7 @@ import Navbar from './module/common/Navbar/Navbar'
 import Footer from './module/common/Footer/Footer';
 import { jwtDecode } from "jwt-decode";
 // import { LogOut } from 'lucide-react';
+// import {jwt_decode} from 'jwt-decode';
 import { AuthContext } from './context/auth/AuthContext';
 import { ToastContext } from './context/Toaster/ToastContext';
 import axios from 'axios';
@@ -23,39 +24,40 @@ const apiurl = import.meta.env.VITE_API_URL;
     reauthenticate()
   },[])
 
-  const reauthenticate =()=>{
-    let token = localStorage.getItem('token')
-    if(token){
+  const reauthenticate = () => {
+    let token = localStorage.getItem('token');
+    if (token) {
       let decode = jwtDecode(token);
       console.log(decode);
-      if(decode?.exp>Math.floor(Date.now() /1000)){
-        // authenticate
-        getUserApi(token,decode);
-      }else{
-        showToast({show:true,title:'logout',message:'token expired'})
+      if (decode?.exp > Math.floor(Date.now() / 1000)) {
+        //authenticated
+        getUserApi(token, decode)
+      } else {
+        //logout
+        showToast({ show: true, title: 'Logout', message: 'Token Expired', type: 'error' })
         logout()
       }
     }
+
   }
+ 
 
 
-
-
-  const getUserApi= (token,decode)=>{
-
-    axios.get(`${apiurl}/api/users/${decode._id}`).then(res=>{
-
-    console.log(res.data);
-    login({token , user: res.data})
-
-
-    }).catch(err=>{
-      showToast({show:true,title:'Error' , message: err.response?.data.error||'server error'})
-      console.log(err)
-      
+  const getUserApi = (token, decode) => {
+    axios.get(`${ apiurl}/api/users/${decode._id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(res => {
+      console.log(res.data);
+      showToast({ show: true, title: 'Welcome Back', message: 'Login Success', type: 'success' })
+      login({ token, user: res.data })
+    }).catch(err => {
+      showToast({ show: true, title: 'Error', message: err.response?.data.error || 'Server Error', type: 'error' })
+      console.log(err);
     })
-    
   }
+
     return (
      <>
       <Navbar/>
