@@ -15,6 +15,8 @@ import About from "./module/About/About.jsx";
 import Contact from "./module/Contact/Contact.jsx";
 import BlockAuthRoutes from "./routes/BlockAuthRoutes.jsx";
 import Dashboard from "./module/admin/Dashboard/Dashboard.jsx";
+import Users from "./module/admin/Users/Users.jsx";
+
 // import { LogIn } from 'lucide-react'
 
 const router = createBrowserRouter([
@@ -55,6 +57,16 @@ const router = createBrowserRouter([
       {
         path: "admin",
         element: <Dashboard />,
+        children: [
+          {
+            path: "dashboard",
+            element: <Home />,
+          },
+          {
+            path: "users",
+            element: <Users />,
+          },
+        ],
       },
 
       // {

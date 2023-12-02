@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
 import React from "react";
 // import Dashboard from './Dashboard';
@@ -11,7 +12,9 @@ const Dashboard = () => {
           <Sidebar />
         </div>
 
-        <div className="flex-1 p-8">Dashboard</div>
+        <div className="flex-1 p-8">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
