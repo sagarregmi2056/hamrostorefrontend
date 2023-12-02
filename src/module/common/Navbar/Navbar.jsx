@@ -1,65 +1,54 @@
-import React, { useContext } from 'react'
-import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react'
-
+import React, { useContext } from "react";
+import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 
 // this is resposible for the navigation like a tag in html
-import {Link, useNavigate} from 'react-router-dom';
-import { AuthContext } from '../../../context/auth/AuthContext';
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../context/auth/AuthContext";
 const menuItems = [
-    {
-      name: 'Home',
-      path: '/'
-    },
-    {
-      name: 'About',
-      path: '/about',
-    },
-    {
-      name: 'Contact',
-      path: '/contact',
-    },
+  {
+    name: "Home",
+    path: "/",
+  },
+  {
+    name: "About",
+    path: "/about",
+  },
+  {
+    name: "Contact",
+    path: "/contact",
+  },
 
-    {
-      name: 'dashboard',
-      path: '/',
-    },
-
-
-
-  ]
+  {
+    name: "dashboard",
+    path: "/admin",
+  },
+];
 
 const Navbar = () => {
+  // aba use context use garna lai hami
 
+  const { isAuthenticated, user, logout } = useContext(AuthContext);
 
-  // aba use context use garna lai hami 
+  // console.log(isAutheticated);
 
-    const {isAuthenticated,user,logout }=  useContext(AuthContext)
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-    // console.log(isAutheticated);
+  // creating varible for navigation and later we gonna create a function below for navigation
+  const navigate = useNavigate();
 
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
-    // creating varible for navigation and later we gonna create a function below for navigation
-    const navigate = useNavigate();
+  const gotopath = (path) => {
+    navigate(path);
+  };
 
-    const toggleMenu = () => {
-      setIsMenuOpen(!isMenuOpen)
-    }
-
-    const gotopath = (path)=>{
-      navigate(path)
-    }
-
-
-
-    console.log(`username ko value ${user}`)
+  console.log(`username ko value ${user}`);
   return (
-    
- <div className="relative w-full bg-white">
+    <div className="relative w-full bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="inline-flex items-center space-x-2">
-
-        
           <span>
             {/* <svg
               width="30"
@@ -74,101 +63,85 @@ const Navbar = () => {
               />
             </svg> */}
             <svg
-      viewBox="0 0 64 64"
-      fill="currentColor"
-      height="1em"
-      width="1em"
-     
-    >
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeMiterlimit={10}
-        strokeWidth={2}
-        d="M53.92 10.081c12.107 12.105 12.107 31.732 0 43.838-12.106 12.108-31.734 12.108-43.84 0-12.107-12.105-12.107-31.732 0-43.838 12.106-12.108 31.733-12.108 43.84 0zM24 48V16"
-      />
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeMiterlimit={10}
-        strokeWidth={2}
-        d="M24 17h5.443s8.562-.783 8.562 7-8.562 7-8.562 7H24"
-      />
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeMiterlimit={10}
-        strokeWidth={2}
-        d="M24 31h6.221s9.781-.893 9.781 8-9.781 8-9.781 8H24"
-      />
-      <path d="M29 13h2v39h-2z" />
-      
-    </svg>
-
-
+              viewBox="0 0 64 64"
+              fill="currentColor"
+              height="1em"
+              width="1em"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeMiterlimit={10}
+                strokeWidth={2}
+                d="M53.92 10.081c12.107 12.105 12.107 31.732 0 43.838-12.106 12.108-31.734 12.108-43.84 0-12.107-12.105-12.107-31.732 0-43.838 12.106-12.108 31.733-12.108 43.84 0zM24 48V16"
+              />
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeMiterlimit={10}
+                strokeWidth={2}
+                d="M24 17h5.443s8.562-.783 8.562 7-8.562 7-8.562 7H24"
+              />
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeMiterlimit={10}
+                strokeWidth={2}
+                d="M24 31h6.221s9.781-.893 9.781 8-9.781 8-9.781 8H24"
+              />
+              <path d="M29 13h2v39h-2z" />
+            </svg>
           </span>
           <span className="font-bold">Hamrostore</span>
-          
         </div>
         <div className="hidden grow items-start lg:flex">
           <ul className="ml-12 inline-flex space-x-8">
-            {menuItems.map((item,index) => (
+            {menuItems.map((item, index) => (
               <Link to={item.path} key={index}>
-              <li>
-                <span
-                 
-                  className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
-                >
-                  {item.name}
-                  {/* <span>
+                <li>
+                  <span className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900">
+                    {item.name}
+                    {/* <span>
                     <ChevronDown className="ml-2 h-4 w-4" />
                   </span> */}
-                </span>
-              </li></Link>
-              
+                  </span>
+                </li>
+              </Link>
             ))}
           </ul>
         </div>
-         
 
-        { isAuthenticated ?
+        {isAuthenticated ? (
+          <div className="hidden space-x-2 lg:flex items-center">
+            <span>{user}</span>
+            <button
+              onClick={logout}
+              type="button"
+              className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div className="hidden space-x-2 lg:block">
+            <button
+              // here we going to add onlick function to navigate
 
-                      
-                    <div className="hidden space-x-2 lg:flex items-center">
-                   
-                    
-                        <span>{user}</span>
-                        <button
-                            onClick={logout}
-                            type="button"
-                            className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                        >
-                            Logout
-                        </button>
-                    </div>
-                        :
-
-        <div className="hidden space-x-2 lg:block">
-          <button
-
-          // here we going to add onlick function to navigate 
-
-            onClick={()=>gotopath('/signup')}
-            type="button"
-            className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          >
-            Sign up
-          </button>
-          <button
-
-            onClick={()=>gotopath('/signin')}
-            type="button"
-            className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          >
-            Log In
-          </button>
-        </div>
-         }
+              onClick={() => gotopath("/signup")}
+              type="button"
+              className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              Sign up
+            </button>
+            <button
+              onClick={() => gotopath("/signin")}
+              type="button"
+              className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              Log In
+            </button>
+          </div>
+        )}
         <div className="lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
         </div>
@@ -179,36 +152,35 @@ const Navbar = () => {
                 <div className="flex items-center justify-between">
                   <div className="inline-flex items-center space-x-2">
                     <span>
-                    <svg
-      viewBox="0 0 64 64"
-      fill="currentColor"
-      height="1em"
-      width="1em"
-     
-    >
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeMiterlimit={10}
-        strokeWidth={2}
-        d="M53.92 10.081c12.107 12.105 12.107 31.732 0 43.838-12.106 12.108-31.734 12.108-43.84 0-12.107-12.105-12.107-31.732 0-43.838 12.106-12.108 31.733-12.108 43.84 0zM24 48V16"
-      />
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeMiterlimit={10}
-        strokeWidth={2}
-        d="M24 17h5.443s8.562-.783 8.562 7-8.562 7-8.562 7H24"
-      />
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeMiterlimit={10}
-        strokeWidth={2}
-        d="M24 31h6.221s9.781-.893 9.781 8-9.781 8-9.781 8H24"
-      />
-      <path d="M29 13h2v39h-2z" />
-    </svg>
+                      <svg
+                        viewBox="0 0 64 64"
+                        fill="currentColor"
+                        height="1em"
+                        width="1em"
+                      >
+                        <path
+                          fill="none"
+                          stroke="currentColor"
+                          strokeMiterlimit={10}
+                          strokeWidth={2}
+                          d="M53.92 10.081c12.107 12.105 12.107 31.732 0 43.838-12.106 12.108-31.734 12.108-43.84 0-12.107-12.105-12.107-31.732 0-43.838 12.106-12.108 31.733-12.108 43.84 0zM24 48V16"
+                        />
+                        <path
+                          fill="none"
+                          stroke="currentColor"
+                          strokeMiterlimit={10}
+                          strokeWidth={2}
+                          d="M24 17h5.443s8.562-.783 8.562 7-8.562 7-8.562 7H24"
+                        />
+                        <path
+                          fill="none"
+                          stroke="currentColor"
+                          strokeMiterlimit={10}
+                          strokeWidth={2}
+                          d="M24 31h6.221s9.781-.893 9.781 8-9.781 8-9.781 8H24"
+                        />
+                        <path d="M29 13h2v39h-2z" />
+                      </svg>
                     </span>
                     <span className="font-bold">Hamrostore</span>
                   </div>
@@ -243,15 +215,14 @@ const Navbar = () => {
                 </div>
                 <div className="mt-2 space-y-2">
                   <button
-                   onClick={()=>gotopath('/signup')}
+                    onClick={() => gotopath("/signup")}
                     type="button"
                     className="w-full rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
-                    Sign up  
+                    Sign up
                   </button>
                   <button
-
-onClick={()=>gotopath('/signin')}
+                    onClick={() => gotopath("/signin")}
                     type="button"
                     className="w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
@@ -264,12 +235,7 @@ onClick={()=>gotopath('/signin')}
         )}
       </div>
     </div>
-    
-    
-  )
-}
+  );
+};
 
-export default Navbar
-
-
-
+export default Navbar;
